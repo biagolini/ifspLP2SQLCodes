@@ -1,0 +1,15 @@
+# Dados principais dos usuários
+tblLogin
+tblPhoneNumber
+tblPicture
+tblUser
+
+# Tabelas auxiliares (Enum-like)
+tblTypeGender
+tblTypeLocation
+tblTypeLogin
+tblTypeNationality
+tblTypePhoneNumber
+tblTypeRegion
+tblTypeState
+tblTypeTimezone
