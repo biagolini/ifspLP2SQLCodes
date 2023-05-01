@@ -7,6 +7,9 @@ CREATE DATABASE CustomerData;
 -- Use the CustomerData database schema
 USE CustomerData;
 
+-- Alter the CustomerData database to use utf8mb4 charset and utf8mb4_unicode_ci collation
+ALTER DATABASE CustomerData CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- Create the tblTypeRegion table
 CREATE TABLE tblTypeRegion (
   idRegionType INT AUTO_INCREMENT PRIMARY KEY,
@@ -44,7 +47,7 @@ CREATE TABLE tblTypeGender (
 );
 
 -- Create the tblTypeTimezone table
-CREATE TABLE tblTypeTimezone (
+CREATE TABLE tblTypeTimeZone (
   idTypeTimezone  INT AUTO_INCREMENT PRIMARY KEY,
   dsTimezoneOffset VARCHAR(255) NOT NULL,
   dsTimezoneDescription VARCHAR(255) NOT NULL,
