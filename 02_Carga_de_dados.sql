@@ -1,7 +1,7 @@
 USE CustomerData;
 
 -- Insert data into tblTypeRegion table
-INSERT INTO tblTypeRegion (dsType) VALUES 
+INSERT INTO CustomerData.tblTypeRegion (dsType) VALUES 
 ('Norte'),
 ('Nordeste'), 
 ('Centro-Oeste'), 
@@ -9,13 +9,13 @@ INSERT INTO tblTypeRegion (dsType) VALUES
 ('Sul');
 
 -- Insert data into tblTypeLocation table
-INSERT INTO tblTypeLocation (dsType) VALUES 
+INSERT INTO CustomerData.tblTypeLocation (dsType) VALUES 
 ('Especial'),
 ('Normal'), 
 ('Trabalhoso');
 
 -- Insert data into tblTypeState table
-INSERT INTO tblTypeState(dsAbbreviation,dsType) VALUES
+INSERT INTO CustomerData.tblTypeState(dsAbbreviation,dsType) VALUES
 ('AC','Acre'),
 ('AL','Alagoas'),
 ('AP','Amapa'),
@@ -45,20 +45,20 @@ INSERT INTO tblTypeState(dsAbbreviation,dsType) VALUES
 ('TO','Tocantins');
 
 -- Insert data into tblTypePhoneNumber table
-INSERT INTO tblTypePhoneNumber (dsType) VALUES 
+INSERT INTO CustomerData.tblTypePhoneNumber (dsType) VALUES 
 ('Movel'),
 ('Casa'), 
 ('Trabalho'),
 ('Outro');
 
 -- Insert data into tblTypeGender table
-INSERT INTO tblTypeGender (dsType) VALUES 
+INSERT INTO CustomerData.tblTypeGender (dsType) VALUES 
 ('M'),
 ('F'),
 ('Nao Declarado');
 
 -- Insert data into tblTypeTimeZone table
-INSERT INTO tblTypeTimeZone (dsTimezoneOffset, dsTimezoneDescription) VALUES
+INSERT INTO CustomerData.tblTypeTimeZone (dsTimezoneOffset, dsTimezoneDescription) VALUES
 ('-3:00', 'Brazil Time (BRT)'),
 ('-12:00', 'Baker Island Time (BIT)'),
 ('-11:00', 'Niue Time (NUT)'),
@@ -88,7 +88,7 @@ INSERT INTO tblTypeTimeZone (dsTimezoneOffset, dsTimezoneDescription) VALUES
 ('12:00', 'New Zealand Standard Time (NZST)');
 
 -- Insert data into tblTypeNationality table
-INSERT INTO tblTypeNationality (dsAbbreviation, dsType) VALUES
+INSERT INTO CustomerData.tblTypeNationality (dsAbbreviation, dsType) VALUES
 ('BR', 'Brazil'),
 ('AR', 'Argentina'),
 ('AU', 'Australia'),
@@ -116,7 +116,7 @@ INSERT INTO tblTypeNationality (dsAbbreviation, dsType) VALUES
 ('ZA', 'South Africa');
 
 -- Insert data into tblUser table
-INSERT INTO tblUser ( idTypeGender, dsTitle, dsFirstName, dsLastName,  idLocationType,  idRegionType,  dsStreet,  dsCity,  idTypeState, dsPostcode,  dsLatitude,  dsLongitude,  idTypeTimezone, dsEmail,  dtBirthday,  dtRegistered, idTypeNationality) VALUES 
+INSERT INTO CustomerData.tblUser ( idTypeGender, dsTitle, dsFirstName, dsLastName,  idLocationType,  idRegionType,  dsStreet,  dsCity,  idTypeState, dsPostcode,  dsLatitude,  dsLongitude,  idTypeTimezone, dsEmail,  dtBirthday,  dtRegistered, idTypeNationality) VALUES 
 (1, 'mr', 'Joselino', 'Alves', 1, 1, 'Rua Espirito Santo 2095', 'Sao Jose de Ribamar', 16,  '96895000', -35.868700, -131.880100, 1,  'joselino@gmail.com', '1996-01-09', '2014-02-09', 1),
 (1, 'mr', 'Antonelo', 'da Conceicao', 2, 2, ' Rua Rui Barbosa 8986', 'Santo Andre', 2,  '40751000', -69.870400, -165.954500, 1,  'antonelo@email.com', '1956-02-12', '2005-12-05', 1),
 (1, 'mr', 'João', 'Silva', 1, 1, 'Rua das Flores 100', 'Rio de Janeiro', 18, '20010020', -22.908333, -43.196388, 1, 'joao.silva@gmail.com', '1990-02-15', '2015-03-20', 1),
@@ -136,23 +136,23 @@ INSERT INTO tblUser ( idTypeGender, dsTitle, dsFirstName, dsLastName,  idLocatio
 (2, 'ms', 'Beatriz', 'Viana', 1, 1, 'Rua do Bosque 1600', 'Aracaju', 26, '49010010', -10.947267, -37.073082, 1, 'beatriz.viana@gmail.com', '1998-08-25', '2021-11-15', 1);
 
 -- Insert data into tblPhoneNumber table
-INSERT INTO tblPhoneNumber (idUser, dsPhoneNumber, idPhoneNumberType) VALUES 
+INSERT INTO CustomerData.tblPhoneNumber (idUser, dsPhoneNumber, idPhoneNumberType) VALUES 
 (1, '+551123456789', 1),
 (2, '+558587478125', 2),
 (2, '+558724140993', 1);
 
 -- Insert data into tblPicture table
-INSERT INTO tblPicture (idUser, dsLargeUrl, dsMediumUrl, dsThumbnailUrl) VALUES
+INSERT INTO CustomerData.tblPicture (idUser, dsLargeUrl, dsMediumUrl, dsThumbnailUrl) VALUES
 (1, 'https://randomuser.me/api/portraits/men/75.jpg', 'https://randomuser.me/api/portraits/med/men/75.jpg', 'https://randomuser.me/api/portraits/thumb/men/75.jpg'),
 (2, 'https://randomuser.me/api/portraits/men/8.jpg', 'https://randomuser.me/api/portraits/med/men/8.jpg', 'https://randomuser.me/api/portraits/thumb/men/8.jpg');
 
 -- Insert data into tblTypeLogin table
-INSERT INTO tblTypeLogin (dsType) VALUES
+INSERT INTO CustomerData.tblTypeLogin (dsType) VALUES
 ('Regular'),
 ('Admin');
 
 -- Insert data into tblLogin table
-INSERT INTO tblLogin(dsUsername,dsPassword, idTypeLogin,idUser) VALUES
+INSERT INTO CustomerData.tblLogin(dsUsername,dsPassword, idTypeLogin,idUser) VALUES
 ('admin', '$2a$10$2.P3Sj9JMG5pHGJYZAKA.eMX97aUcQwMWRNX9Puo1k2YBQuY0BvKS',1,NULL),
 ('marketing', '$2a$10$2.P3Sj9JMG5pHGJYZAKA.eMX97aUcQwMWRNX9Puo1k2YBQuY0BvKS',1,NULL),
 ('miguel@email.com', '$2a$10$WXfQsblcdtTpL/dndZUC9.NUXDk6bvOTpCr33N7E2/cB/U83RTfvu',2,1),
