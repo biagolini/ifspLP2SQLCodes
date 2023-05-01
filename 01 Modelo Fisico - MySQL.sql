@@ -1,49 +1,34 @@
--- -----------------------------------------------------
--- Apagar BD antigo, caso exista
--- ----------------------------------------------------- 
+-- Drop the existing CustomerData database if it exists
 DROP DATABASE IF EXISTS CustomerData;
 
--- -----------------------------------------------------
--- Criar BD
--- -----------------------------------------------------
+-- Create the CustomerData database
 CREATE DATABASE CustomerData;
 
--- -----------------------------------------------------
--- Schema
--- -----------------------------------------------------
+-- Use the CustomerData database schema
 USE CustomerData;
 
-
--- -----------------------------------------------------
--- tblTypeRegion
--- -----------------------------------------------------
+-- Create the tblTypeRegion table
 CREATE TABLE tblTypeRegion (
   idRegionType INT AUTO_INCREMENT PRIMARY KEY,
   dsType VARCHAR(255) NOT NULL,
   stActive BIT NOT NULL DEFAULT 1
 );
 
------------------------------------------------------
--- tblTypeLocation
--- -----------------------------------------------------
+-- Create the tblTypeLocation table
 CREATE TABLE tblTypeLocation (
   idLocationType  INT AUTO_INCREMENT PRIMARY KEY,
   dsType VARCHAR(255) NOT NULL,
   stActive BIT NOT NULL DEFAULT 1
 );
 
--- -----------------------------------------------------
--- tblTypePhoneNumber
--- -----------------------------------------------------
+-- Create the tblTypePhoneNumber table
 CREATE TABLE tblTypePhoneNumber (
   idPhoneNumberType INT AUTO_INCREMENT PRIMARY KEY,
   dsType VARCHAR(255) NOT NULL,
   stActive BIT NOT NULL DEFAULT 1
 );
 
--- -----------------------------------------------------
--- tblTypeState
--- -----------------------------------------------------
+-- Create the tblTypeState table
 CREATE TABLE tblTypeState (
   idTypeState  INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
   dsAbbreviation VARCHAR(2) NOT NULL,
@@ -51,20 +36,14 @@ CREATE TABLE tblTypeState (
   stActive BOOLEAN NOT NULL DEFAULT 1
 );
 
-
--- -----------------------------------------------------
--- tblTypeGender
--- -----------------------------------------------------
+-- Create the tblTypeGender table
 CREATE TABLE tblTypeGender (
   idTypeGender INT AUTO_INCREMENT PRIMARY KEY,
   dsType VARCHAR(255) NOT NULL,
   stActive BIT NOT NULL DEFAULT 1
 );
 
-
--- -----------------------------------------------------
--- tblTypeTimeZone
--- -----------------------------------------------------
+-- Create the tblTypeTimezone table
 CREATE TABLE tblTypeTimezone (
   idTypeTimezone  INT AUTO_INCREMENT PRIMARY KEY,
   dsTimezoneOffset VARCHAR(255) NOT NULL,
@@ -72,10 +51,7 @@ CREATE TABLE tblTypeTimezone (
   stActive BIT NOT NULL DEFAULT 1
 );
 
-
--- -----------------------------------------------------
--- tblNationality
--- -----------------------------------------------------
+-- Create the tblTypeNationality table
 CREATE TABLE tblTypeNationality (
   idTypeNationality  INT AUTO_INCREMENT PRIMARY KEY,
   dsAbbreviation VARCHAR(255) NOT NULL,
@@ -83,9 +59,7 @@ CREATE TABLE tblTypeNationality (
   stActive BIT NOT NULL DEFAULT 1
 );
 
--- -----------------------------------------------------
--- tblUser
--- -----------------------------------------------------
+-- Create the tblUser table
 CREATE TABLE tblUser (
   idUser INT AUTO_INCREMENT PRIMARY KEY,
   idTypeGender INT,
@@ -114,10 +88,7 @@ CREATE TABLE tblUser (
   FOREIGN KEY (idTypeNationality) REFERENCES tblTypeNationality (idTypeNationality)
 );
 
-
--- -----------------------------------------------------
--- tblPhoneNumber
--- -----------------------------------------------------
+-- Create the tblPhoneNumber table
 CREATE TABLE tblPhoneNumber (
   idPhoneNumber INT AUTO_INCREMENT PRIMARY KEY,
   idUser INT,
@@ -125,47 +96,37 @@ CREATE TABLE tblPhoneNumber (
   idPhoneNumberType  INT,
   stActive BIT NOT NULL DEFAULT 1, 
   FOREIGN KEY (idUser) REFERENCES tblUser (idUser),
-  FOREIGN KEY (idPhoneNumberType) REFERENCES tblTypePhoneNumber (idPhoneNumberType)
+  FOREIGN KEY (
+idPhoneNumberType) REFERENCES tblTypePhoneNumber (idPhoneNumberType)
 );
 
-
-
--- -----------------------------------------------------
--- tblPicture
--- -----------------------------------------------------
+-- Create the tblPicture table
 CREATE TABLE tblPicture (
-  idPicture INT AUTO_INCREMENT PRIMARY KEY,
-  idUser INT,
-  dsLargeUrl VARCHAR(255) NOT NULL,
-  dsMediumUrl VARCHAR(255) NOT NULL,
-  dsThumbnailUrl VARCHAR(255) NOT NULL,
-  stActive BIT NOT NULL DEFAULT 1, 
-  FOREIGN KEY (idUser) REFERENCES tblUser (idUser)
+idPicture INT AUTO_INCREMENT PRIMARY KEY,
+idUser INT,
+dsLargeUrl VARCHAR(255) NOT NULL,
+dsMediumUrl VARCHAR(255) NOT NULL,
+dsThumbnailUrl VARCHAR(255) NOT NULL,
+stActive BIT NOT NULL DEFAULT 1,
+FOREIGN KEY (idUser) REFERENCES tblUser (idUser)
 );
 
-
--- -----------------------------------------------------
--- tblTypeLogin
--- -----------------------------------------------------
+-- Create the tblTypeLogin table
 CREATE TABLE tblTypeLogin (
-  idTypeLogin INT  AUTO_INCREMENT PRIMARY KEY,
-  dsType VARCHAR(255) NOT NULL,
-  stActive BIT NOT NULL DEFAULT 1
+idTypeLogin INT AUTO_INCREMENT PRIMARY KEY,
+dsType VARCHAR(255) NOT NULL,
+stActive BIT NOT NULL DEFAULT 1
 );
 
-
--- -----------------------------------------------------
--- tblLogin
--- -----------------------------------------------------
+-- Create the tblLogin table
 CREATE TABLE tblLogin (
-  idLogin INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  idUser  INTEGER,  
-  idTypeLogin INTEGER NOT NULL,
-  dsUsername VARCHAR(255) UNIQUE NOT NULL,  
-  dsPassword  VARCHAR(255) NOT NULL,
-  dsPasswordDateTimeLastEdition  DATETIME NOT NULL DEFAULT  CURRENT_TIMESTAMP,
-  stActive BIT NOT NULL DEFAULT 1, 
-  FOREIGN KEY (idUser) REFERENCES tblUser (idUser),
-  FOREIGN KEY (idTypeLogin) REFERENCES tblTypeLogin (idTypeLogin)
+idLogin INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+idUser INTEGER,
+idTypeLogin INTEGER NOT NULL,
+dsUsername VARCHAR(255) UNIQUE NOT NULL,
+dsPassword VARCHAR(255) NOT NULL,
+dsPasswordDateTimeLastEdition DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+stActive BIT NOT NULL DEFAULT 1,
+FOREIGN KEY (idUser) REFERENCES tblUser (idUser),
+FOREIGN KEY (idTypeLogin) REFERENCES tblTypeLogin (idTypeLogin)
 );
-
