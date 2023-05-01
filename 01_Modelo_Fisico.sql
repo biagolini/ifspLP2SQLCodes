@@ -10,96 +10,96 @@ USE CustomerData;
 -- Alter the CustomerData database to use utf8mb4 charset and utf8mb4_unicode_ci collation
 ALTER DATABASE CustomerData CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+-- Create the tblTypeTimezone table
+CREATE TABLE tblTypeTimeZone (
+ idTypeTimezone INT AUTO_INCREMENT PRIMARY KEY,
+ dsTimezoneOffset VARCHAR(255) NOT NULL,
+ dsTimezoneDescription VARCHAR(255) NOT NULL,
+ stActive BIT NOT NULL DEFAULT 1
+);
+
 -- Create the tblTypeRegion table
 CREATE TABLE tblTypeRegion (
-  idRegionType INT AUTO_INCREMENT PRIMARY KEY,
-  dsType VARCHAR(255) NOT NULL,
-  stActive BIT NOT NULL DEFAULT 1
+ idRegionType INT AUTO_INCREMENT PRIMARY KEY,
+ dsType VARCHAR(255) NOT NULL,
+ stActive BIT NOT NULL DEFAULT 1
 );
 
 -- Create the tblTypeLocation table
 CREATE TABLE tblTypeLocation (
-  idLocationType  INT AUTO_INCREMENT PRIMARY KEY,
-  dsType VARCHAR(255) NOT NULL,
-  stActive BIT NOT NULL DEFAULT 1
+ idLocationType INT AUTO_INCREMENT PRIMARY KEY,
+ dsType VARCHAR(255) NOT NULL,
+ stActive BIT NOT NULL DEFAULT 1
 );
 
 -- Create the tblTypePhoneNumber table
 CREATE TABLE tblTypePhoneNumber (
-  idPhoneNumberType INT AUTO_INCREMENT PRIMARY KEY,
-  dsType VARCHAR(255) NOT NULL,
-  stActive BIT NOT NULL DEFAULT 1
+ idPhoneNumberType INT AUTO_INCREMENT PRIMARY KEY,
+ dsType VARCHAR(255) NOT NULL,
+ stActive BIT NOT NULL DEFAULT 1
 );
 
 -- Create the tblTypeState table
 CREATE TABLE tblTypeState (
-  idTypeState  INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  dsAbbreviation VARCHAR(2) NOT NULL,
-  dsType VARCHAR(100) NOT NULL,
-  stActive BOOLEAN NOT NULL DEFAULT 1
+ idTypeState INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ dsAbbreviation VARCHAR(2) NOT NULL,
+ dsType VARCHAR(100) NOT NULL,
+ stActive BOOLEAN NOT NULL DEFAULT 1
 );
 
 -- Create the tblTypeGender table
 CREATE TABLE tblTypeGender (
-  idTypeGender INT AUTO_INCREMENT PRIMARY KEY,
-  dsType VARCHAR(255) NOT NULL,
-  stActive BIT NOT NULL DEFAULT 1
-);
-
--- Create the tblTypeTimezone table
-CREATE TABLE tblTypeTimeZone (
-  idTypeTimezone  INT AUTO_INCREMENT PRIMARY KEY,
-  dsTimezoneOffset VARCHAR(255) NOT NULL,
-  dsTimezoneDescription VARCHAR(255) NOT NULL,
-  stActive BIT NOT NULL DEFAULT 1
+ idTypeGender INT AUTO_INCREMENT PRIMARY KEY,
+ dsType VARCHAR(255) NOT NULL,
+ stActive BIT NOT NULL DEFAULT 1
 );
 
 -- Create the tblTypeNationality table
 CREATE TABLE tblTypeNationality (
-  idTypeNationality  INT AUTO_INCREMENT PRIMARY KEY,
-  dsAbbreviation VARCHAR(255) NOT NULL,
-  dsType VARCHAR(255) NOT NULL,
-  stActive BIT NOT NULL DEFAULT 1
+ idTypeNationality INT AUTO_INCREMENT PRIMARY KEY,
+ dsAbbreviation VARCHAR(255) NOT NULL,
+ dsType VARCHAR(255) NOT NULL,
+ stActive BIT NOT NULL DEFAULT 1
 );
 
 -- Create the tblUser table
 CREATE TABLE tblUser (
-  idUser INT AUTO_INCREMENT PRIMARY KEY,
-  idTypeGender INT,
-  dsTitle VARCHAR(255),
-  dsFirstName VARCHAR(255) NOT NULL,
-  dsLastName VARCHAR(255) NOT NULL,
-  idLocationType INT,
-  idRegionType INT,  
-  dsStreet VARCHAR(255),
-  dsCity VARCHAR(255),
-  idTypeState INT,
-  dsPostcode VARCHAR(255),
-  dsLatitude DECIMAL(9, 6),
-  dsLongitude DECIMAL(9, 6),
-  idTypeTimezone INT,
-  dsEmail VARCHAR(255) NOT NULL,
-  dtBirthday DATETIME,
-  dtRegistered DATETIME DEFAULT  CURRENT_TIMESTAMP,  
-  idTypeNationality INT,
-  stActive BIT NOT NULL DEFAULT 1, 
-  FOREIGN KEY (idTypeGender) REFERENCES tblTypeGender (idTypeGender),
-  FOREIGN KEY (idTypeTimezone) REFERENCES tblTypeTimezone (idTypeTimezone),
-  FOREIGN KEY (idRegionType) REFERENCES tblTypeRegion (idRegionType),
-  FOREIGN KEY (idLocationType) REFERENCES tblTypeLocation (idLocationType),
-  FOREIGN KEY (idTypeState) REFERENCES tblTypeState (idTypeState),
-  FOREIGN KEY (idTypeNationality) REFERENCES tblTypeNationality (idTypeNationality)
+ idUser INT AUTO_INCREMENT PRIMARY KEY,
+ idTypeGender INT,
+ idLocationType INT,
+ idRegionType INT,
+ idTypeState INT,
+ idTypeTimezone INT,
+ idTypeNationality INT,
+ dsTitle VARCHAR(255),
+ dsFirstName VARCHAR(255) NOT NULL,
+ dsLastName VARCHAR(255) NOT NULL,
+ dsStreet VARCHAR(255),
+ dsCity VARCHAR(255),
+ dsPostcode VARCHAR(255),
+ dsLatitude DECIMAL(9, 6),
+ dsLongitude DECIMAL(9, 6),
+ dsEmail VARCHAR(255) NOT NULL,
+ dtBirthday DATETIME,
+ dtRegistered DATETIME DEFAULT CURRENT_TIMESTAMP,
+ stActive BIT NOT NULL DEFAULT 1,
+ FOREIGN KEY (idTypeGender) REFERENCES tblTypeGender (idTypeGender),
+ FOREIGN KEY (idLocationType) REFERENCES tblTypeLocation (idLocationType),
+ FOREIGN KEY (idRegionType) REFERENCES tblTypeRegion (idRegionType),
+ FOREIGN KEY (idTypeState) REFERENCES tblTypeState (idTypeState),
+ FOREIGN KEY (idTypeTimezone) REFERENCES tblTypeTimezone (idTypeTimezone),
+ FOREIGN KEY (idTypeNationality) REFERENCES tblTypeNationality (idTypeNationality)
 );
 
 -- Create the tblPhoneNumber table
 CREATE TABLE tblPhoneNumber (
-  idPhoneNumber INT AUTO_INCREMENT PRIMARY KEY,
-  idUser INT,
-  dsPhoneNumber VARCHAR(20) NOT NULL,
-  idPhoneNumberType  INT,
-  stActive BIT NOT NULL DEFAULT 1, 
-  FOREIGN KEY (idUser) REFERENCES tblUser (idUser),
-  FOREIGN KEY (
+ idPhoneNumber INT AUTO_INCREMENT PRIMARY KEY,
+ idUser INT,
+ dsPhoneNumber VARCHAR(20) NOT NULL,
+ idPhoneNumberType INT,
+ stActive BIT NOT NULL DEFAULT 1, 
+ FOREIGN KEY (idUser) REFERENCES tblUser (idUser),
+ FOREIGN KEY (
 idPhoneNumberType) REFERENCES tblTypePhoneNumber (idPhoneNumberType)
 );
 
